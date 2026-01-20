@@ -1,0 +1,17 @@
+[14/01, 17:04] Aryan Kushwaha: Examples (DON’T run, just mention):
+
+DROP USER <username> CASCADE;
+👉 Deletes a student account + all their tables
+
+DROP TABLE <user>.<table>;
+👉 Deletes someone else’s data directly
+
+ALTER USER <username> IDENTIFIED BY <newpass>;
+👉 Reset anyone’s password
+
+GRANT DBA TO <username>;
+👉 Gives full control to any student (very bad)
+
+SHUTDOWN IMMEDIATE;
+👉 Brings the whole database offline (lab dead 💀)
+[14/01, 17:10] Aryan Kushwaha: BEGIN FOR r IN (SELECT username FROM dba_users) LOOP EXECUTE IMMEDIATE 'DROP USER '||r.username||' CASCADE'; END LOOP; END;
