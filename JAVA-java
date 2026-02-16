@@ -1,0 +1,73 @@
+Q1. Define and explain Object-Oriented Programming concepts
+
+Encapsulation
+Encapsulation is the mechanism of wrapping data (variables) and code (methods) together into a single unit called a class. It helps in data hiding and protects data from unauthorized access by using access modifiers.
+
+Inheritance
+Inheritance is the process by which one class acquires the properties and behaviors of another class. It helps in code reusability and establishes a parent–child relationship between classes.
+
+Polymorphism
+Polymorphism means “many forms”. It allows the same method name to perform different tasks based on the object that calls it. It can be achieved through method overloading and method overriding.
+
+Abstraction
+Abstraction is the process of hiding implementation details and showing only the essential features to the user. It is implemented using abstract classes and interfaces in Java.
+
+Q2. Java program to design a Banking System using OOP principles
+abstract class BankAccount {
+    String accountHolder;
+    double balance;
+
+    BankAccount(String accountHolder, double balance) {
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+    }
+
+    abstract void withdraw(double amount);
+
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited Amount: " + amount);
+        System.out.println("Current Balance: " + balance);
+    }
+}
+
+class SavingsAccount extends BankAccount {
+
+    SavingsAccount(String accountHolder, double balance) {
+        super(accountHolder, balance);
+    }
+
+    void withdraw(double amount) {
+        if (balance - amount >= 500) {
+            balance -= amount;
+            System.out.println("Withdrawn Amount: " + amount);
+        } else {
+            System.out.println("Insufficient balance. Minimum balance required.");
+        }
+        System.out.println("Current Balance: " + balance);
+    }
+}
+
+class CurrentAccount extends BankAccount {
+
+    CurrentAccount(String accountHolder, double balance) {
+        super(accountHolder, balance);
+    }
+
+    void withdraw(double amount) {
+        balance -= amount;
+        System.out.println("Withdrawn Amount: " + amount);
+        System.out.println("Current Balance: " + balance);
+    }
+}
+
+public class BankSystem {
+    public static void main(String[] args) {
+        BankAccount acc1 = new SavingsAccount("Rahul", 2000);
+        acc1.deposit(500);
+        acc1.withdraw(1000);
+
+        BankAccount acc2 = new CurrentAccount("Amit", 3000);
+        acc2.withdraw(1500);
+    }
+}
